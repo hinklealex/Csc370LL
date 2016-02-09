@@ -9,31 +9,21 @@ import android.widget.TextView;
 /**
  * Created by AlexHinkle on 1/28/16.
  */
-public class LinkedList {
+public class LinkedList
+{
     private Node head;
     private LinearLayout layout;
-    private String payload;
-    private Node nextNode;
-
-
-    public LinkedList(String payload)
-    {
-        this.payload = payload;
-        this.nextNode = head;
-
-    }
-
-
-
+    public int count;
     public LinkedList(LinearLayout layout)
     {
         this.head = null;
         this.layout = layout;
+        this.count = 0;
     }
 
     public void display()
     {
-        //this.layout.removeAllViews();
+        this.layout.removeAllViews();
         if(this.head == null)
         {
             View v = ListCore.inflater.inflate(R.layout.node, null);
@@ -52,12 +42,36 @@ public class LinkedList {
         this.layout.addView(v);
     }
 
+    public Node getAtIndex(int i)
+    {
+        return null;
+    }
+
+    //inefficient, but accurate
+    public int count()
+    {
+        int count = 0;
+        if(head != null)
+        {
+            count++;
+            //at least one node in the list
+            Node currNode = head;
+            while(currNode.getNextNode() != null)
+            {
+                currNode = currNode.getNextNode();
+                count++;
+            }
+        }
+        return count;
+    }
+
     public void addFront(String value)
     {
         //this adds a new Node to the front of the list with payload == value
         Node n = new Node(value);
         n.setNextNode(this.head);
         this.head = n;
+        this.count++;
     }
 
     public Node removeFront()
@@ -69,44 +83,63 @@ public class LinkedList {
         if(this.head != null)
         {
             this.head = this.head.getNextNode();
+            nodeToReturn.setNextNode(null);
+            this.count--;
         }
-        nodeToReturn.setNextNode(null);
+
         return nodeToReturn;
     }
 
     public void addEnd(String value)
     {
-        Node n = new Node(value);
-
-            Node temp = head;
-        for(int i = 0; i < 1000; i++)
+        if(this.head == null)
         {
-            if (temp.getNextNode() == null) {
+            this.addFront(value);
+        }
+        else
+        {
+            Node n = new Node(value);
+            Node currNode = head;
+            while(currNode.getNextNode() != null)
+            {
+                currNode = currNode.getNextNode();
+            }
+            //currNode is currently pointing at the last node in the list
+            currNode.setNextNode(n);
+            this.count++;
+        }
+    }
 
-
-                temp.setNextNode(n);
-                break;
-            } else {
-                temp = temp.getNextNode();
+    public Node removeEnd()
+    {
+        if(head == null)
+        {
+            return head;
+        }
+        else
+        {
+            this.count--;
+            Node nodeToReturn = head;
+            //deal with the 1-list special case
+            if(head.getNextNode() == null)
+            {
+                head = null;
+                return nodeToReturn;
+            }
+            else
+            {
+                //there are at least 2 nodes in the list
+                Node currNode = head;
+                while (currNode.getNextNode() != null && currNode.getNextNode().getNextNode() != null)
+                {
+                    currNode = currNode.getNextNode();
+                }
+                //currNode points to the Node right before the last node in the list
+                nodeToReturn = currNode.getNextNode();
+                currNode.setNextNode(null);
+                return nodeToReturn;
             }
         }
     }
 
-
-
-    public Node removeEnd()
-    {
-
-        Node nodeToReturn = this.head;
-        for(int i = 0; i < 1000; i++)
-            if (nodeToReturn.getNextNode() == null) {
-                nodeToReturn.setPayload(null);
-                break;
-            } else {
-
-                nodeToReturn = nodeToReturn.getNextNode();
-
-            }
-        return nodeToReturn;
-    }
 }

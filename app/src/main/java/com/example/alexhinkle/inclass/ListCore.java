@@ -8,5 +8,6 @@ import android.view.LayoutInflater;
     public class ListCore
     {
         public static LayoutInflater inflater;
+
     }
 

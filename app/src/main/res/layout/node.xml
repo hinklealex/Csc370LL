@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="15"
-        android:id="@+id/TheValueTF"
+        android:id="@+id/theValueTF"
         android:layout_gravity="center_horizontal"
         android:gravity="center" />
 </LinearLayout>
