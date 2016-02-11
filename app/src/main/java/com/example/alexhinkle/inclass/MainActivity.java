@@ -3,14 +3,12 @@ package com.example.alexhinkle.inclass;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import java.lang.String;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -19,7 +17,6 @@ public class MainActivity extends AppCompatActivity
     private Button removeFrontButton;
     private Button removeEndButton;
     private EditText newValueEditText;
-    private LinkedList ll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -37,23 +34,17 @@ public class MainActivity extends AppCompatActivity
         ListCore.inflater = this.getLayoutInflater();
 
         LinearLayout svLL = (LinearLayout)this.findViewById(R.id.scrollViewLL);
-        ll = new LinkedList(svLL);
-        ll.addFront("1");
-        ll.addFront("2");
-        ll.addFront("3");
-        ll.addFront("4");
-        ll.display();
-        ll.removeFront();
-        ll.display();
-        ll.addEnd("6");
-        ll.addEnd("7");
-        ll.addEnd("8");
-        ll.display();
-        ll.removeEnd();
-        ll.display();
+        ListCore.ll = new LinkedList(svLL);
+        //ll.addFront("1");
+        //ll.addFront("2");
+        //ll.addFront("3");
+        //ll.addFront("4");
+        //ll.display();
+        ListCore.ll.addEnd("6");
+        ListCore.ll.addEnd("7");
+        ListCore.ll.addEnd("8");
+        ListCore.ll.display();
 
-        System.out.println("**** " + ll.count);
-        System.out.println("**** " + ll.count());
         /*
         View v;
         for(int i = 0; i < 10; i++)
@@ -68,32 +59,28 @@ public class MainActivity extends AppCompatActivity
 
     public void aButtonClicked(View sender)
     {
-        Editable text = this.newValueEditText.getText();
         if(sender == this.addFrontButton)
         {
-            ll.addFront(String.valueOf(text));
-            ll.display();
             System.out.println("**** add front button pressed");
             System.out.println("adding: " + this.newValueEditText.getText());
+            ListCore.ll.addFront(this.newValueEditText.getText().toString());
         }
         else if(sender == this.addEndButton)
         {
-            ll.addEnd(String.valueOf(text));
-            ll.display();
             System.out.println("**** add end button pressed");
             System.out.println("adding: " + this.newValueEditText.getText());
+            ListCore.ll.addEnd(this.newValueEditText.getText().toString());
         }
         else if(sender == this.removeFrontButton)
         {
-            ll.removeFront();
-            ll.display();
             System.out.println("**** remove front button pressed");
+            ListCore.ll.removeFront();
         }
         else if(sender == this.removeEndButton)
         {
-            ll.removeEnd();
-            ll.display();
             System.out.println("**** remove end button pressed");
+            ListCore.ll.removeEnd();
         }
+        ListCore.ll.display();
     }
 }

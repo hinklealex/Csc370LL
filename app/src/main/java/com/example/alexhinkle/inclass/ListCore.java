@@ -5,9 +5,9 @@ import android.view.LayoutInflater;
  * Created by AlexHinkle on 2/3/16.
  */
 
-    public class ListCore
-    {
-        public static LayoutInflater inflater;
-
-    }
+public class ListCore
+{
+    public static LayoutInflater inflater;
+    public static LinkedList ll;
+}
 

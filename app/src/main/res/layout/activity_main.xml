@@ -22,7 +22,7 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="239dp">
+            android:layout_height="168dp">
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -82,10 +82,9 @@
                     android:onClick="aButtonClicked"/>
             </LinearLayout>
         </LinearLayout>
-
         <ScrollView
             android:layout_width="fill_parent"
-            android:layout_height="match_parent"
+            android:layout_height="295dp"
             android:id="@+id/theScrollView"
             android:fillViewport="false">
 
@@ -94,9 +93,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/scrollViewLL">
-
             </LinearLayout>
         </ScrollView>
-
     </LinearLayout>
 </RelativeLayout>
+
