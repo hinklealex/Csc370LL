@@ -132,7 +132,104 @@ public class LinkedList
             this.count++;
         }
     }
+    public Node removeAtIndex(int index)
+    {
+        //is the index out of bounds?
+        if(index < 0 || index >= this.count)
 
+        {
+            System.err.println("Linked list index out of bounds:" + index);
+        }
+        else if(index == 0)
+        {
+            return this.removeFront();
+        }
+        else if( index == this.count - 1)
+        {
+            return this.removeEnd();
+        }
+        else
+        {
+            Node nodeBefore = head;
+            Node nodeToRemove = null;
+            Node nodeAfter = null;
+            for(int i = 0; i < index - 1; i++)
+
+            {
+                nodeBefore = nodeBefore.getNextNode();
+
+
+            }
+            nodeToRemove = nodeBefore.getNextNode();
+            nodeAfter = nodeToRemove.getNextNode();
+            nodeBefore.setNextNode(nodeAfter);
+            nodeToRemove.setNextNode(null);
+            return nodeToRemove;
+        }
+      return null;
+    }
+    public void addAtIndexAfter(String value, int index)
+    {
+        if(index < 0 || index > this.count)
+        {
+            System.err.println("Liked list index out of bounds:" + index);
+
+        }
+
+        else if(index == this.count)
+        {
+            this.addEnd(value);
+        }
+        else
+        {
+
+            Node nodeBefore = head;
+            Node nodeToAdd = new Node(value);
+            Node nodeAfter = null;
+
+            for(int i = 0; i < index; i++)
+
+            {
+                nodeBefore = nodeBefore.getNextNode();
+            }
+            nodeAfter = nodeBefore.getNextNode();
+            nodeBefore.setNextNode(nodeToAdd);
+            nodeToAdd.setNextNode(nodeAfter);
+
+
+        }
+    }
+    public void addAtIndexBefore(String value, int index)
+    {
+        if(index < 0 || index >= this.count)
+        {
+            System.err.println("Liked list index out of bounds:" + index);
+
+        }
+        else if(index == 0)
+        {
+            this.addFront(value);
+        }
+
+        else
+        {
+
+            Node nodeBefore = head;
+            Node nodeToAdd = new Node(value);
+            Node nodeAfter = null;
+
+            for(int i = 0; i < index - 1; i++)
+
+            {
+                nodeBefore = nodeBefore.getNextNode();
+            }
+            nodeAfter = nodeBefore.getNextNode();
+            nodeBefore.setNextNode(nodeToAdd);
+            nodeToAdd.setNextNode(nodeAfter);
+
+
+        }
+    }
     public Node removeEnd()
     {
         if(head == null)

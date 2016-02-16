@@ -1,6 +1,7 @@
 package com.example.alexhinkle.inclass;
 
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,13 +17,15 @@ public class MainActivity extends AppCompatActivity
     private Button addEndButton;
     private Button removeFrontButton;
     private Button removeEndButton;
-    private EditText newValueEditText;
+    public EditText newValueEditText = (EditText)this.findViewById(R.id.newValueET);
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_main);
+
+        ListCore.mainActivity = this;
 
         //give ourselves programmatic access to the buttons and edit text
         this.addFrontButton = (Button)this.findViewById(R.id.addFrontButton);
@@ -55,6 +58,12 @@ public class MainActivity extends AppCompatActivity
             svLL.addView(v);
         }
         */
+    }
+
+    public void stackButtonClicked(View sender)
+    {
+        Intent i = new Intent(this, StackActivity.class);
+        this.startActivity(i);
     }
 
     public void aButtonClicked(View sender)

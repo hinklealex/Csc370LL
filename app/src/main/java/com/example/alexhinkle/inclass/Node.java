@@ -2,9 +2,14 @@ package com.example.alexhinkle.inclass;
 
 
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+
+import java.util.List;
 
 /**
  * Created by AlexHinkle on 1/28/16.
@@ -15,6 +20,8 @@ public class Node
     private Node nextNode;
     private TextView valueLabel;
     private LinearLayout theLayout;
+    private EditText newValueEditText;
+
 
 
     public Node(String payload)
@@ -31,9 +38,11 @@ public class Node
 
     public void display(LinearLayout layout)
     {
+
         final Node myself = this;
         this.theLayout = layout;
         View v = ListCore.inflater.inflate(R.layout.node, null);
+        this.newValueEditText = (EditText)v.findViewById(R.id.newValueET);
         this.valueLabel = (TextView) v.findViewById(R.id.theValueTF);
         this.valueLabel.setText(this.payload);
         this.valueLabel.setOnClickListener(new View.OnClickListener() {
@@ -45,21 +54,34 @@ public class Node
                 //in the Linked List.  Update this to remove myself from the linked list
                 //and then ask the list to display itself, which should update the entire
                 //view.  That is to say, we will no longer need to hide ourself.
-                System.out.println("***** Text Was Clicked: " + payload);
+
 
                 //valueLabel.setVisibility(View.GONE);
-                System.out.println("**** Position = " + ListCore.ll.indexOf(myself));
+                //ListCore.ll.removeAtIndex(ListCore.ll.indexOf(myself));
 
-                    head = myself;
-                Node nodeToReturn = this.head;
-                if(this.head != null) {
-                    this.head = this.head.getNextNode();
-                    nodeToReturn.setNextNode(null);
-                }
-                
+               // ListCore.ll.display();
+                PopupMenu popup = new PopupMenu(ListCore.mainActivity, v);
+                popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        System.out.println("clicked on item:" + item.getTitle());
+                        if (item.getTitle().equals("DELETE")) {
+                            ListCore.ll.removeAtIndex(ListCore.ll.indexOf(myself));
+                            ListCore.ll.display();
+                        } else if (item.getTitle().equals("ADD ABOVE")) {
+                            ListCore.ll.addAtIndexAfter(newValueEditText.getText().toString(), ListCore.ll.indexOf(myself));
+                            ListCore.ll.display();
+                        } else if (item.getTitle().equals("ADD BELOW")) {
+                            ListCore.ll.addAtIndexBefore(newValueEditText.getText().toString(), ListCore.ll.indexOf(myself));
+                            ListCore.ll.display();
+                        }
+                        return true;
+                    }
+                });
+                popup.show();
 
 
-                ListCore.ll.display();
 
             }
 
