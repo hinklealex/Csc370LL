@@ -20,9 +20,6 @@ public class Node
     private Node nextNode;
     private TextView valueLabel;
     private LinearLayout theLayout;
-    private EditText newValueEditText;
-
-
 
     public Node(String payload)
     {
@@ -38,55 +35,52 @@ public class Node
 
     public void display(LinearLayout layout)
     {
-
         final Node myself = this;
         this.theLayout = layout;
         View v = ListCore.inflater.inflate(R.layout.node, null);
-        this.newValueEditText = (EditText)v.findViewById(R.id.newValueET);
         this.valueLabel = (TextView) v.findViewById(R.id.theValueTF);
         this.valueLabel.setText(this.payload);
-        this.valueLabel.setOnClickListener(new View.OnClickListener() {
-            public Node head;
-
+        this.valueLabel.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 //Right now, we "hide" this text label and prove that we can find "myself"
                 //in the Linked List.  Update this to remove myself from the linked list
                 //and then ask the list to display itself, which should update the entire
                 //view.  That is to say, we will no longer need to hide ourself.
-
-
                 //valueLabel.setVisibility(View.GONE);
-                //ListCore.ll.removeAtIndex(ListCore.ll.indexOf(myself));
 
-               // ListCore.ll.display();
                 PopupMenu popup = new PopupMenu(ListCore.mainActivity, v);
                 popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener()
+                {
                     @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        System.out.println("clicked on item:" + item.getTitle());
-                        if (item.getTitle().equals("DELETE")) {
+                    public boolean onMenuItemClick(MenuItem item)
+                    {
+                        if (item.getTitle().equals("DELETE"))
+                        {
                             ListCore.ll.removeAtIndex(ListCore.ll.indexOf(myself));
                             ListCore.ll.display();
-                        } else if (item.getTitle().equals("ADD ABOVE")) {
-                            ListCore.ll.addAtIndexAfter(newValueEditText.getText().toString(), ListCore.ll.indexOf(myself));
+                        }
+                        else if (item.getTitle().equals("ADD ABOVE"))
+                        {
+                            int pos = ListCore.ll.indexOf(myself);
+                            ListCore.ll.addAtIndex(ListCore.newValueEditText.getText().toString(), pos);
                             ListCore.ll.display();
-                        } else if (item.getTitle().equals("ADD BELOW")) {
-                            ListCore.ll.addAtIndexBefore(newValueEditText.getText().toString(), ListCore.ll.indexOf(myself));
+                        }
+                        else if (item.getTitle().equals("ADD BELOW"))
+                        {
+                            int pos = ListCore.ll.indexOf(myself);
+                            ListCore.ll.addAtIndex(ListCore.newValueEditText.getText().toString(), pos+1);
                             ListCore.ll.display();
                         }
                         return true;
                     }
                 });
-                popup.show();
-
-
+                popup.show();//showing popup menu
 
             }
-
-
-
         });
         layout.addView(v);
 
@@ -103,9 +97,7 @@ public class Node
 
     public void setPayload(String payload)
     {
-
         this.payload = payload;
-
     }
 
     public Node getNextNode()

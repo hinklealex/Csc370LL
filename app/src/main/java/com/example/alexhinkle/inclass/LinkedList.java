@@ -21,6 +21,73 @@ public class LinkedList
         this.count = 0;
     }
 
+    public void addAtIndex(String value, int index)
+    {
+        //this guy should add a new Node to the list with payload = value at the specified
+        //index assuming that index is a legal position in the list.
+        if(index == 0)
+        {
+            this.addFront(value);
+        }
+        else if(index == this.count)
+        {
+            this.addEnd(value);
+        }
+        else
+        {
+            this.count++;
+            Node n = new Node(value);
+            Node nodeBefore = this.head;
+            Node nodeAt;
+
+            for(int i = 0; i < index-1; i++)
+            {
+                nodeBefore = nodeBefore.getNextNode();
+            }
+            nodeAt = nodeBefore.getNextNode();
+            n.setNextNode(nodeAt);
+            nodeBefore.setNextNode(n);
+        }
+
+    }
+
+    public Node removeAtIndex(int index)
+    {
+        //is the index out of bounds?
+        if(index < 0 || index >= this.count)
+        {
+            System.err.println("Linked List index out of bounds: " + index);
+            return null;
+        }
+        else if(index == 0)
+        {
+            return this.removeFront();
+        }
+        else if(index == this.count-1)
+        {
+            return this.removeEnd();
+        }
+        else
+        {
+            this.count--;
+            //we have work to do
+            Node nodeBefore = head;
+            Node nodeToRemove = null;
+            Node nodeAfter = null;
+
+            //position nodeBefore to the node before the node we want to remove
+            for(int i = 0; i < index-1; i++)
+            {
+                nodeBefore = nodeBefore.getNextNode();
+            }
+            nodeToRemove = nodeBefore.getNextNode();
+            nodeAfter = nodeToRemove.getNextNode();
+            nodeBefore.setNextNode(nodeAfter);
+            nodeToRemove.setNextNode(null);
+            return nodeToRemove;
+        }
+    }
+
     public int indexOf(Node n)
     {
         if(this.head != null)
@@ -65,9 +132,23 @@ public class LinkedList
         this.layout.addView(v);
     }
 
-    public Node getAtIndex(int i)
+    public Node getAtIndex(int pos)
     {
-        return null;
+        if( pos < 0 || pos <= this.count)
+        {
+            System.err.println("Linked List Index Out of Bounds");
+            return null;
+        }
+        else
+        {
+            Node nodeToReturn = this.head;
+            for(int i = 0; i < pos; i++)
+            {
+                nodeToReturn = nodeToReturn.getNextNode();
+
+            }
+            return nodeToReturn;
+        }
     }
 
     //inefficient, but accurate
@@ -132,104 +213,7 @@ public class LinkedList
             this.count++;
         }
     }
-    public Node removeAtIndex(int index)
-    {
-        //is the index out of bounds?
-        if(index < 0 || index >= this.count)
 
-        {
-            System.err.println("Linked list index out of bounds:" + index);
-        }
-        else if(index == 0)
-        {
-            return this.removeFront();
-        }
-        else if( index == this.count - 1)
-        {
-            return this.removeEnd();
-        }
-        else
-        {
-            Node nodeBefore = head;
-            Node nodeToRemove = null;
-            Node nodeAfter = null;
-            for(int i = 0; i < index - 1; i++)
-
-            {
-                nodeBefore = nodeBefore.getNextNode();
-
-
-            }
-            nodeToRemove = nodeBefore.getNextNode();
-            nodeAfter = nodeToRemove.getNextNode();
-            nodeBefore.setNextNode(nodeAfter);
-            nodeToRemove.setNextNode(null);
-            return nodeToRemove;
-        }
-      return null;
-    }
-    public void addAtIndexAfter(String value, int index)
-    {
-        if(index < 0 || index > this.count)
-        {
-            System.err.println("Liked list index out of bounds:" + index);
-
-        }
-
-        else if(index == this.count)
-        {
-            this.addEnd(value);
-        }
-        else
-        {
-
-            Node nodeBefore = head;
-            Node nodeToAdd = new Node(value);
-            Node nodeAfter = null;
-
-            for(int i = 0; i < index; i++)
-
-            {
-                nodeBefore = nodeBefore.getNextNode();
-            }
-            nodeAfter = nodeBefore.getNextNode();
-            nodeBefore.setNextNode(nodeToAdd);
-            nodeToAdd.setNextNode(nodeAfter);
-
-
-        }
-    }
-    public void addAtIndexBefore(String value, int index)
-    {
-        if(index < 0 || index >= this.count)
-        {
-            System.err.println("Liked list index out of bounds:" + index);
-
-        }
-        else if(index == 0)
-        {
-            this.addFront(value);
-        }
-
-        else
-        {
-
-            Node nodeBefore = head;
-            Node nodeToAdd = new Node(value);
-            Node nodeAfter = null;
-
-            for(int i = 0; i < index - 1; i++)
-
-            {
-                nodeBefore = nodeBefore.getNextNode();
-            }
-            nodeAfter = nodeBefore.getNextNode();
-            nodeBefore.setNextNode(nodeToAdd);
-            nodeToAdd.setNextNode(nodeAfter);
-
-
-        }
-    }
     public Node removeEnd()
     {
         if(head == null)

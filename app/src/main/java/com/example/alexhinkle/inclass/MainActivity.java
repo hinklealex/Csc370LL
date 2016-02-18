@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity
     private Button addEndButton;
     private Button removeFrontButton;
     private Button removeEndButton;
-    public EditText newValueEditText = (EditText)this.findViewById(R.id.newValueET);
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -25,6 +24,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_main);
 
+        //let ListCore know about me
         ListCore.mainActivity = this;
 
         //give ourselves programmatic access to the buttons and edit text
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity
         this.addEndButton = (Button)this.findViewById(R.id.addEndButton);
         this.removeFrontButton = (Button)this.findViewById(R.id.removeFrontButton);
         this.removeEndButton = (Button)this.findViewById(R.id.removeEndButton);
-        this.newValueEditText = (EditText)this.findViewById(R.id.newValueET);
+        ListCore.newValueEditText = (EditText)this.findViewById(R.id.newValueET);
 
         ListCore.inflater = this.getLayoutInflater();
 
@@ -71,14 +71,14 @@ public class MainActivity extends AppCompatActivity
         if(sender == this.addFrontButton)
         {
             System.out.println("**** add front button pressed");
-            System.out.println("adding: " + this.newValueEditText.getText());
-            ListCore.ll.addFront(this.newValueEditText.getText().toString());
+            System.out.println("adding: " + ListCore.newValueEditText.getText());
+            ListCore.ll.addFront(ListCore.newValueEditText.getText().toString());
         }
         else if(sender == this.addEndButton)
         {
             System.out.println("**** add end button pressed");
-            System.out.println("adding: " + this.newValueEditText.getText());
-            ListCore.ll.addEnd(this.newValueEditText.getText().toString());
+            System.out.println("adding: " + ListCore.newValueEditText.getText());
+            ListCore.ll.addEnd(ListCore.newValueEditText.getText().toString());
         }
         else if(sender == this.removeFrontButton)
         {

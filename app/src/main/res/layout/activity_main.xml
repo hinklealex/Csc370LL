@@ -32,20 +32,20 @@
                 android:weightSum="1">
 
                 <EditText
-                    android:layout_width="121dp"
+                    android:layout_width="141dp"
                     android:layout_height="56dp"
                     android:id="@+id/newValueET"
                     android:editable="true"
                     android:enabled="true"
                     android:gravity="center"
-                    android:layout_weight="0.45" />
+                    android:layout_weight="0.83"/>
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Stack ->"
+                    android:text="stack ->"
                     android:id="@+id/button"
-                    android:onClick="stackButtonClicked" />
+                    android:onClick="stackButtonClicked"/>
 
             </LinearLayout>
 
@@ -106,4 +106,3 @@
         </ScrollView>
     </LinearLayout>
 </RelativeLayout>
-
