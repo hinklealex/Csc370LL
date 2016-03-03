@@ -5,7 +5,7 @@ import android.widget.LinearLayout;
 /**
  * Created by AlexHinkle on 2/17/16.
  */
-public class Stack extends LinkedList
+public class Stack extends StringLinkedList
 {
     public Stack(LinearLayout layout)
     {

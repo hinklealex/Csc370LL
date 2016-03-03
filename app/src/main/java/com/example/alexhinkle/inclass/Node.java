@@ -17,6 +17,7 @@ import java.util.List;
 public class Node
 {
     private String payload;
+    private int pl;
     private Node nextNode;
     private TextView valueLabel;
     private LinearLayout theLayout;
@@ -94,10 +95,19 @@ public class Node
     {
         return payload;
     }
+    public int getPayloadBT()
+    {
+        return pl;
+    }
+
 
     public void setPayload(String payload)
     {
         this.payload = payload;
+    }
+    public void setPayloadBT(int pl)
+    {
+        this.pl = pl;
     }
 
     public Node getNextNode()
