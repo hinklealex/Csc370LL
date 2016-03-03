@@ -1,13 +1,11 @@
 package com.example.alexhinkle.inclass;
-
 import android.widget.LinearLayout;
-
 /**
- * Created by AlexHinkle on 2/17/16.
+ * Created by AlexHinkle on 3/3/16.
  */
-public class Stack extends LinkedList
+public class StringStack extends StringLinkedList
 {
-    public Stack(LinearLayout layout)
+    public StringStack(LinearLayout layout)
     {
         super(layout);
     }

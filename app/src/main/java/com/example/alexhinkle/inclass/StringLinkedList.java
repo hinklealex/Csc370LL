@@ -1,20 +1,17 @@
 package com.example.alexhinkle.inclass;
-
-
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
 /**
- * Created by AlexHinkle on 1/28/16.
+ * Created by AlexHinkle on 3/3/16.
  */
-public class LinkedList
+public class StringLinkedList
 {
     private Node head;
     private LinearLayout layout;
     public int count;
-    public LinkedList(LinearLayout layout)
+    public StringLinkedList(LinearLayout layout)
     {
         this.head = null;
         this.layout = layout;
